@@ -1,0 +1,326 @@
+// Welcome to the TypeScript Playground, this is a website
+// which gives you a chance to write, share and learn TypeScript.
+
+// You could think of it in three ways:
+//
+//  - A location to learn TypeScript where nothing can break
+//  - A place to experiment with TypeScript syntax, and share the URLs with others
+//  - A sandbox to experiment with different compiler features of TypeScript
+
+// const isPalindromeNumber=(palin:string):boolean=>{
+//     let isPalindrome = palin.split("").reverse().join("");
+//     return isPalindrome===palin;
+// }
+
+//console.log(isPalindromeNumber("12321"));
+
+// const calculateAverage = (myArray:number[]):number=>{
+//     let myNumber = myArray.reduce((acc,curVal)=>acc+curVal,0);
+//     return myNumber/(myArray.length);
+// }
+
+// console.log(calculateAverage([1,2,3,4,5,6]))
+
+
+// const findMaxValue = (myNum:number[]):number=>{
+//     let maxNumber = Math.max(...myNum);
+//     return maxNumber;
+// }
+
+// console.log(findMaxValue([1,2,3,6,4,19,15]))
+
+// const value1 = {name:"John",age:30};
+// console.log(typeof value1)
+
+// const myNumbers:number[] = [1,2,3,4,5,6];
+// //const updatedNumbers:number[] = myNumbers.map((num:number)=>num ** 2);
+// const updatedNumbers:number[] = myNumbers.map((num:number)=>Math.pow(num,2));
+// console.log(updatedNumbers)
+
+
+// const names: string[] = ["alice", "bob", "anna", "andrew", "alex"];
+// const uppercase:string[] = names.map((letter:string)=>letter[0].toUpperCase()+ letter.slice(1));
+// console.log(uppercase)
+
+//const names: string[] = ["Alice", "Bob", "anna", "Andrew", "Alex"];
+// const startingWithA : string[] = names.filter((letter:string)=>letter[0].toUpperCase()=='A');
+// console.log(startingWithA)
+
+// const strLength:string[] = names.filter((letter:string)=>letter.length>4);
+// console.log(strLength)
+
+// type Person={
+//     name:string;
+//     age:number;
+//     isStudent:boolean;
+//     address:{
+//         city:string;
+//         country:string;
+//     }
+// }
+
+// const person:Person={
+//     name:"Hello",
+//     age:12,
+//     isStudent:true,
+//     address:{
+//         city:"Dharwad",
+//         country:"india"
+//     }
+// }
+
+
+//console.log(person.address)
+
+
+
+// type Student = {
+//     name : string;
+//     age : number;
+//     gender? : string;
+//     greet : (country:string)=>string;
+//     //(country:string):string
+// }
+
+// const student1:Student={
+//     name : "Ram",
+//     age: 25,
+//     greet:(country):string => 
+//          `Welcome , My name is ${student1.name} and age : ${student1.age} and my country is ${country}`
+    
+// }
+
+// console.log(student1.age)
+// console.log(student1.greet('INDIA'))
+/////////////////////////////////////////////////////////////////////////////////////////
+// enum Roles {
+//     user = "user",
+//     admin="admin"
+// }
+
+// type LoginDetails={
+//     name? : string;
+//     email : string;
+//     password : string;
+//     roles: Roles;
+// }
+
+// const user1:LoginDetails={
+//     email:"ram@gmail.com",
+//     password:"23456",
+//     roles:Roles.admin
+// }
+
+// const user2:LoginDetails={
+//     email:"ram1@gmail.com",
+//     password:"234567",
+//     roles:Roles.admin
+// }
+
+// const isAdmin:(user1:LoginDetails)=>string = (user1:LoginDetails)=>{
+//     const {name,email,password,roles} = user1;
+//     return roles==="admin"?`${email} is admin`:`${email} is not admin`
+// }
+// console.log(user1.roles)
+// console.log(user2.roles)
+// console.log(isAdmin(user1))
+//////////////////////////////////////////////////////////////////////////////////////
+//Tuple
+// type ProductInfo = readonly[string,number,number];
+
+
+// const product1:ProductInfo = ['Television',200,5];
+// const product2:ProductInfo = ['Radio',100,3];
+
+// const productDetails : (product:ProductInfo)=>string = (product:ProductInfo):string =>{
+//     const [productName,price,quantity] = product;
+//     return `Name : ${productName}, Price: ${price}, Quantity: ${quantity}`;
+// }
+
+
+// console.log(productDetails(product1))
+// console.log(productDetails(product2))
+
+
+// const userInput : (value:string|number)=>void = (value:string|number)=>{
+//     if(typeof value === 'number'){
+//         return value * 2;
+//     }
+//     else if(typeof value === 'string'){
+//         return value.toUpperCase();
+//     }
+//     else{
+//         throw new Error("Invalid")
+//     }
+// }
+
+// console.log(userInput(10));
+// console.log(userInput("ram"))
+
+///Exercise
+
+// const usersInput : (value:string|number|boolean) => void = (value:string|number|boolean) => {
+//     if(typeof value === 'string'){
+//         return value[0].toUpperCase() + value.slice(1);
+//     }
+
+//     if(typeof value === 'number'){
+//         return "$"+value.toFixed(2);
+//     }
+
+//     if(typeof value === 'boolean'){
+//         return "Yes";
+//     }else{
+//         return "No";
+//     }
+
+   
+// }
+
+// console.log(usersInput("ram"));
+// console.log(usersInput(false));
+// console.log(usersInput(123.456))
+
+
+type User = {
+    id: number;
+    name: string;
+    email: string;
+}
+
+type Account = {
+    accountId: number;
+    accountType: string;
+    balance: number;
+}
+
+const user1 : User = {id:1,name:"Seeta",email:"Seeta@gmail.com"};
+const account1 : Account = {accountId : 345, accountType:"savings", balance:1234560}
+const combineUserAndAccount : (users:User,accounts:Account) =>void = (users:User,accounts:Account)   =>{
+    return {...users,...accounts}
+}
+
+console.log(combineUserAndAccount(user1,account1))
+
+
+------------Generics
+
+
+function add<T>(num1:T,num2:T):T{
+    return num1 + num2;
+}
+
+const numbers:number = add<number>(1,2);
+const strings:string = add<string>("Hello"," world")
+console.log(numbers)
+console.log(strings)
+
+
+
+
+
+
+
+
+//abstract classes
+
+// class MathOperations{
+//   public static piValue = Math.PI;
+
+//   public static add(num1:number,num2:number):number{
+//     return num1+num2;
+//   }
+
+//   public static sub(num1:number,num2:number):number{
+//     return num1-num2;
+//   }
+
+//   public static mul(num1:number,num2:number):number{
+//     return num1*num2;
+//   }
+
+//   public static divide(num1:number,num2:number):number{
+//     return num1/num2;
+//   }
+
+//   public static modulo(num1:number,num2:number):number{
+//     return num1%num2;
+//   }
+
+  
+// }
+
+// console.log(MathOperations.piValue)
+// console.log(MathOperations.add(2,4))
+// console.log(MathOperations.sub(12,4))
+// console.log(MathOperations.mul(12,4))
+// console.log(MathOperations.divide(12,4))
+// console.log(MathOperations.modulo(12,5))
+
+
+
+abstract class Shape{
+  constructor(protected color:string){}
+  abstract calculateArea():number;
+  abstract displayArea():void;
+}
+
+class Circle extends Shape{
+  constructor(protected color:string,public radius:number){
+    super(color);
+    
+  }
+
+  calculateArea():number{
+    return Math.PI * this.radius * this.radius;
+  }
+
+  displayArea():void{
+    console.log(`The area of circle with radius : ${this.radius} and color: ${this.color}`);
+  }
+}
+
+
+class Square extends Shape{
+  constructor(protected color:string,public side:number){
+    super(color);
+  }
+
+   calculateArea():number{
+    return this.side * this.side;
+  }
+
+  displayArea():void{
+    console.log(`The area of square with side : ${this.side} and color: ${this.color}`);
+  }
+}
+
+class Rectangle extends Shape{
+  
+  constructor(protected color:string,public width:number,public height:number){
+    super(color);
+  }
+
+   
+  calculateArea():number{
+    return this.width * this.height;
+  }
+
+  displayArea():void{
+    console.log(`The area of Rectangle with width : ${this.width} and height : ${this.height} color: ${this.color}`);
+  }
+}
+// const area1 = new Circle("red",5);
+// console.log(area1.calculateArea());
+// area1.displayArea();
+
+// const area2 = new Square("green",6);
+// console.log(area2.calculateArea());
+// area2.displayArea();
+
+const area3 = new Rectangle("green",6,4);
+console.log(area3.calculateArea());
+area3.displayArea();
+// To learn more about the language, click above in "Examples" or "What's New".
+// Otherwise, get started by removing these comments and the world is your playground.
+  
