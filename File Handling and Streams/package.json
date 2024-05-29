@@ -1,15 +1,15 @@
 {
-  "name": "users_api",
+  "name": "file-handling-and-streams",
   "version": "1.0.0",
   "description": "",
-  "main": "users.js",
+  "main": "File.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node Stream.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.19.2"
+    "stream": "^0.0.2"
   }
 }

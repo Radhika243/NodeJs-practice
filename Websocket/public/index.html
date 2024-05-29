@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Websockets in NodeJs</title>
+</head>
+<body>
+    <h1>Chatting Room</h1>
+    <input type="text" id="message" placeholder="Enter the message here...."/>
+    <button id="sendBtn">Submit</button>
+    <!-- loads the script for socket.io -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        //new client id will be printed on the console
+        const socket = io();
+        const messageInput = document.getElementById('message');
+        const sendBtn = document.getElementById('sendBtn');
+        //To receive the same message that is being sent to the server
+        socket.on('message',(message)=>{
+            console.log(`The same message received to all the io clients : ${message}`);
+        })
+
+        sendBtn.addEventListener('click',(e)=>{
+            const messageInputs = messageInput.value;
+            //send the message to the server
+            console.log(`message sent: ${messageInputs}`);
+            socket.emit('user-message',messageInputs)
+        })
+    </script>
+</body>
+</html>
